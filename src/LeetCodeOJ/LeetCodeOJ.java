@@ -68,20 +68,53 @@ public class LeetCodeOJ {
     		tmpA = tmpA.next;
     		tmpB = tmpB.next;
     	}
-    	return tmpA;
+    	return tmpA;		   
+    }
+    
+	/*
+	 * 简化的算法，不用计算链表的长度
+	 * 时间复杂度O(n+m)，空间复杂度O（1）
+	 * 1。遍历链表A和B，每次各一步
+	 * 2.如果A到达链表结尾，重新指向B（是的，是B）；类似的当B到达链表结尾时，重新指向链表A
+	 * 3.如果在任何一点上A与B相遇，则改点就是交叉点
+	 */
+    
+    public static ListNode getIntersectionNode2(ListNode headA,ListNode headB)
+    {
+    	if(headA == null || headB == null)
+    		return null;
     	
-    	/*
-    	 * 简化的算法，不用计算链表的长度
-    	 * 时间复杂度O(n+m)，空间复杂度O（1）
-    	 * 1。遍历链表A和B，每次各一步
-    	 * 2.如果A到达链表结尾，重新指向B（是的，是B）；类似的当B到达链表结尾时，重新指向链表A
-    	 * 3.如果在任何一点上A与B相遇，则改点就是交叉点
-    	 */
-    		   
+    	ListNode pNodeA = headA;
+    	ListNode pNodeB = headB;
+    	
+    	while(pNodeA != pNodeB )
+    	{
+    		ListNode pNodeAEnd = null;
+    		ListNode pNodeBEnd = null;
+    		if(pNodeA.next == null)
+    		{
+    			pNodeAEnd = pNodeA;
+    			pNodeA = headB;
+    		}
+    		if(pNodeB.next == null)
+    		{
+    			pNodeBEnd = pNodeB;
+    			pNodeB = headA;
+    		}
+    		
+    		if(pNodeAEnd != null && pNodeBEnd != null)
+    			if(pNodeAEnd != pNodeBEnd)
+    				return null;
+    		
+    		pNodeA = pNodeA.next;
+    		pNodeB = pNodeB.next;	
+    	}
+    	return pNodeA;
     }
     
     /*
      * 随机获取字符串
+     * 考虑以后做成库
      */
     public static String getRandomString(int length) { 
     	//length表示生成字符串的长度  
@@ -118,8 +151,8 @@ public class LeetCodeOJ {
     	/*
     	 * insert intersectedNode to the end of head1 and head2
     	 */
-    	//head1.insert(intersectedNode);
-    	//head2.insert(intersectedNode);
+    	head1.insert(intersectedNode);
+    	head2.insert(intersectedNode);
     	
     	
     	listLength = 1 + (int)(Math.random()*10);
@@ -137,9 +170,9 @@ public class LeetCodeOJ {
     	
     	System.out.println("intersected");
     	
-    	ListNode result = getIntersectionNode(head1,head2);
+    	ListNode result = getIntersectionNode2(head1,head2);
     	if(result != null)
-    		System.out.println((getIntersectionNode(head1,head2)).value);
+    		System.out.println(result.value);
     	else
     		System.out.println("null");
     		

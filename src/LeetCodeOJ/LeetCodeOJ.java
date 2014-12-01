@@ -42,13 +42,31 @@ public class LeetCodeOJ {
     	System.out.println("MinElement:" + minStackInstance.getMin());
     }
     
+    /*
+     * test function for Palindrome class
+     * 2014/12.1
+     * @idiotshi
+     */
+    public static void testPalindrome()
+    {
+    	//String testString = "A man, a plan, a canal: Panama";
+    	//String testString = "race a car";
+    	String testString = null;
+    	Palindrome palindromeInstance = new Palindrome();
+    	System.out.println(palindromeInstance.isPalindrome(testString) ? "YES":"NO");
+    	System.out.println(palindromeInstance.isPalindrome2(testString) ? "YES":"NO");
+    }
+    
     public static void main(String [] args)
     {
     	//test case for intersectionLinkedList
     	//testIntersectionLinkedList();
     	
     	//test case for MinStack
-    	testMinStack();
+    	//testMinStack();
+    	
+    	//test case for Palindrome
+    	testPalindrome();
     		
     }
 }

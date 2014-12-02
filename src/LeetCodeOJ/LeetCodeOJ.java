@@ -67,10 +67,13 @@ public class LeetCodeOJ {
     public static void testPascalsTriangle()
     {
     	PascalsTriangle triangleInstance = new PascalsTriangle();
-    	//for(int testRows = 0;testRows < 20;testRows++ )
-    	//{
-    	int testRows = (int)(Math.random()*100);
+    	//PascalsTriangleII
+    	PascalsTriangleII rowsTnstance = new PascalsTriangleII();
+
+    	int testRows = (int)(Math.random()*20);
+    	
 		List<List<Integer>> triangle = triangleInstance.generate(testRows);
+		
     		
 		for(int i = 0;i < testRows;i++)
 		{
@@ -80,6 +83,16 @@ public class LeetCodeOJ {
 			}
 			System.out.println();
 		}
+		
+		/*
+		 * output Pascal's Triangle II
+		 */
+		List<Integer> rows = rowsTnstance.getRow(testRows-1); 
+		for(int j = 0;j < rows.size();j++)
+		{
+			System.out.print(" "+rows.get(j)+" ");
+		}
+		System.out.println();
     		
     	//}
     	

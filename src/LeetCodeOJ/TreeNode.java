@@ -83,4 +83,26 @@ class BinaryTree {
 	/*
 	 * non-recrusive mode
 	 */
+	
+	/*
+	 * is Balanced Binary Tree
+	 * 2014/12/2
+	 * idiotshi
+	 */
+	public boolean isBalanced(TreeNode root)
+	{
+		if(root == null)
+			return true;
+		int leftDepth = getDepth(root.left);
+		int rightDepth = getDepth(root.right);
+		
+		return (Math.abs(leftDepth - rightDepth) < 2 ) 
+				&& isBalanced(root.left) && isBalanced(root.right);
+	}
+	
+	private int getDepth(TreeNode root)
+	{
+		if(root == null) return 0;
+		return 1 + Math.max(getDepth(root.left), getDepth(root.right));
+	}
 }

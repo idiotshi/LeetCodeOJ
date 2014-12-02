@@ -107,8 +107,8 @@ public class LeetCodeOJ {
     	BinaryTree binaryTree = new BinaryTree();
     	PathSum pathSumInstance = new PathSum();
     	
-    	binaryTree.insert(2);
     	binaryTree.insert(1);
+    	binaryTree.insert(2);
     	binaryTree.insert(3);
     	
     	if(pathSumInstance.hasPathSum(binaryTree.root, 1))
@@ -122,6 +122,7 @@ public class LeetCodeOJ {
     	 * test minimum depth
     	 */
     	System.out.println(binaryTree.minDepth(binaryTree.root));
+    	System.out.println(binaryTree.isBalanced(binaryTree.root) ? "YES":"No");
     }
     
     

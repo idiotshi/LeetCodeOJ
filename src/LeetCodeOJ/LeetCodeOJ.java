@@ -1,5 +1,7 @@
 package LeetCodeOJ;
 
+import java.util.List;
+
 public class LeetCodeOJ {
  
     public static void testIntersectionLinkedList()
@@ -57,6 +59,32 @@ public class LeetCodeOJ {
     	System.out.println(palindromeInstance.isPalindrome2(testString) ? "YES":"NO");
     }
     
+    /*
+     * test function for pascal's triangle
+     * 2014/12/2
+     * idiotshi
+     */
+    public static void testPascalsTriangle()
+    {
+    	PascalsTriangle triangleInstance = new PascalsTriangle();
+    	//for(int testRows = 0;testRows < 20;testRows++ )
+    	//{
+    	int testRows = (int)(Math.random()*100);
+		List<List<Integer>> triangle = triangleInstance.generate(testRows);
+    		
+		for(int i = 0;i < testRows;i++)
+		{
+			for(int j = 0;j < triangle.get(i).size();j++)
+			{
+				System.out.print(" "+triangle.get(i).get(j)+" ");
+			}
+			System.out.println();
+		}
+    		
+    	//}
+    	
+    	
+    }
     public static void main(String [] args)
     {
     	//test case for intersectionLinkedList
@@ -66,7 +94,8 @@ public class LeetCodeOJ {
     	//testMinStack();
     	
     	//test case for Palindrome
-    	testPalindrome();
+    	//testPalindrome();
+    	testPascalsTriangle();
     		
     }
 }

@@ -95,9 +95,30 @@ public class LeetCodeOJ {
 		System.out.println();
     		
     	//}
-    	
-    	
     }
+    
+    /*
+     * test function for PathSum
+     * idiotshi
+     * 2014/12/2
+     */
+    public static void pathSumTest()
+    {
+    	BinaryTree binaryTree = new BinaryTree();
+    	PathSum pathSumInstance = new PathSum();
+    	
+    	binaryTree.insert(1);
+    	binaryTree.insert(2);
+    	
+    	if(pathSumInstance.hasPathSum(binaryTree.root, 1))
+    		System.out.println("YES");
+    	else
+    		System.out.println("No");
+    	
+    	binaryTree.preOrderTraversal(binaryTree.root);
+    }
+    
+    
     public static void main(String [] args)
     {
     	//test case for intersectionLinkedList
@@ -108,7 +129,17 @@ public class LeetCodeOJ {
     	
     	//test case for Palindrome
     	//testPalindrome();
-    	testPascalsTriangle();
+    	
+    	/*
+    	 * testPascalsTriangle
+    	 */
+    	//testPascalsTriangle();
+    	
+    	
+    	/*
+    	 * pathSumTest
+    	 */
+    	pathSumTest();
     		
     }
 }

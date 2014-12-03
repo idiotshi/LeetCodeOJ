@@ -1,5 +1,5 @@
 package LeetCodeOJ;
-
+import java.util.*;
 public class TreeNode {
 	int val;
 	TreeNode left;
@@ -36,7 +36,7 @@ class BinaryTree {
 	public void preOrderTraversal(TreeNode root)
 	{
 		if(root == null) return;
-		System.out.println(root.val);
+		System.out.print(root.val + " ");
 		
 		preOrderTraversal(root.left);
 		preOrderTraversal(root.right);
@@ -104,5 +104,75 @@ class BinaryTree {
 	{
 		if(root == null) return 0;
 		return 1 + Math.max(getDepth(root.left), getDepth(root.right));
+	}
+	
+	/*
+	 * Binary tree level order traversal
+	 * idiotshi
+	 * 2014/12/3 
+	 */
+	public List<List<Integer>> levelOrder(TreeNode root)
+	{
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		
+		if(root == null)
+			return result;
+		
+		List<Integer> level = new ArrayList<Integer>();
+		LinkedList<TreeNode> nodeQueue = new LinkedList<TreeNode>();
+		
+		TreeNode current = root;
+		TreeNode levelLast = root;
+		
+		nodeQueue.offer(root);
+		
+		
+		while( !nodeQueue.isEmpty()){
+			current = nodeQueue.poll();
+			level.add(current.val);
+			
+			if(current.left != null)
+				nodeQueue.offer(current.left);
+			if(current.right != null)
+				nodeQueue.offer(current.right);
+			
+			if(current == levelLast){
+				result.add(level);
+				level = new ArrayList<Integer>();
+				levelLast = nodeQueue.peekLast();
+			}
+		}
+		return result;
+	}
+	
+	/*
+	 * do NOT complete
+	 * dont know how to 
+	 */
+	public List<List<Integer>> levelOrderDfs(TreeNode root)
+	{
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		
+		
+		dfsLevelOrder(root,0,result);
+		return result;
+	}
+	private void dfsLevelOrder(TreeNode root,int level,List<List<Integer>> result)
+	{
+		if(root == null)
+			return;
+		//while(result.size() <= level)
+			//result.add(new ArrayList<Integer>());
+		List<Integer> row;
+		if(level == 0){
+			row = new ArrayList<Integer>();
+			row.add(root.val);
+		}else{
+			row = result.get(level);
+			row.add(root.val);
+		}
+		result.add(level, row);
+		dfsLevelOrder(root.left,level+1,result);
+		dfsLevelOrder(root.right,level+1,result);
 	}
 }

@@ -98,31 +98,62 @@ public class LeetCodeOJ {
     }
     
     /*
-     * test function for PathSum
+     * test function for binary tree related prob
      * idiotshi
      * 2014/12/2
      */
-    public static void pathSumTest()
+    public static void binaryTreeRelatedTest()
     {
     	BinaryTree binaryTree = new BinaryTree();
     	PathSum pathSumInstance = new PathSum();
     	
-    	binaryTree.insert(1);
-    	binaryTree.insert(2);
+    	binaryTree.insert(5);
     	binaryTree.insert(3);
+    	binaryTree.insert(8);
+    	binaryTree.insert(2);
+    	binaryTree.insert(4);
+    	binaryTree.insert(7);
+    	binaryTree.insert(10);
     	
+    	/*
+    	 * test hasPathSum
+    	 */
+    	System.out.print("hasPathSum: ");
     	if(pathSumInstance.hasPathSum(binaryTree.root, 1))
     		System.out.println("YES");
     	else
     		System.out.println("No");
     	
+    	/*
+    	 * test preOrderTraversal
+    	 */
+    	System.out.print("preOrderTraversal: ");
     	binaryTree.preOrderTraversal(binaryTree.root);
+    	System.out.println();
     	
     	/*
     	 * test minimum depth
     	 */
+    	System.out.print("minDepth: ");
     	System.out.println(binaryTree.minDepth(binaryTree.root));
+    	
+    	/*
+    	 * test isBalanced
+    	 */
+    	System.out.print("isBalanced: ");
     	System.out.println(binaryTree.isBalanced(binaryTree.root) ? "YES":"No");
+    	
+    	/*
+    	 * test level order
+    	 */
+    	List<List<Integer>> levelOrderResult = binaryTree.levelOrder(binaryTree.root);
+    	System.out.print("levelOrderResult: ");
+    	System.out.println(levelOrderResult);
+    	
+    	//List<List<Integer>> levelOrderResultDfs = binaryTree.levelOrderDfs(binaryTree.root);
+    	//System.out.print("levelOrderDfsResult: ");
+    	//System.out.println(levelOrderResultDfs);
+    	
     }
     
     
@@ -144,9 +175,9 @@ public class LeetCodeOJ {
     	
     	
     	/*
-    	 * pathSumTest
+    	 * binary tree related prob test
     	 */
-    	pathSumTest();
+    	binaryTreeRelatedTest();
     		
     }
 }

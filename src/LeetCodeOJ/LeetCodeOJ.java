@@ -156,6 +156,17 @@ public class LeetCodeOJ {
     	
     }
     
+    /*
+     * test function for ClimbingStairs
+     * 2014/12/8
+     */
+    public static void testClimbingStairs()
+    {
+    	ClimbingStairs climbStairInstance = new ClimbingStairs();
+    	for(int n = -1;n < 20;n++)
+    		System.out.println(climbStairInstance.climbStairs(n)+" ways to climb "+n+" stairs");
+    }
+    
     
     public static void main(String [] args)
     {
@@ -177,7 +188,12 @@ public class LeetCodeOJ {
     	/*
     	 * binary tree related prob test
     	 */
-    	binaryTreeRelatedTest();
-    		
+    	//binaryTreeRelatedTest();
+    	
+    	/*
+    	 * testClimbingStairs
+    	 * 2014/12/8
+    	 */
+    	testClimbingStairs();
     }
 }

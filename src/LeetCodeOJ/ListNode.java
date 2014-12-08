@@ -42,4 +42,21 @@ public class ListNode {
 		System.out.print(tmp.value);
 		System.out.println();
 	}
+	
+	/*
+	 * Remove Duplicates from Sorted List
+	 * 2014/12/8
+	 */
+	public ListNode deleteDuplicates(ListNode head){
+	   	if(head == null) return head;
+    	ListNode node = head;
+		while(node != null && node.next != null){//{1}
+			if(node.value == node.next.value)
+				node.next = node.next.next;
+			else
+			    node = node.next;//{1,1,1}
+		}
+		
+		return head;
+	}
 }

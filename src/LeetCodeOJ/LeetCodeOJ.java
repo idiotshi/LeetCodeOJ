@@ -167,6 +167,18 @@ public class LeetCodeOJ {
     		System.out.println(climbStairInstance.climbStairs(n)+" ways to climb "+n+" stairs");
     }
     
+    /*
+     * test function for math problem
+     * 2014/12/8
+     */
+    
+    public static void testMathProblem()
+    {
+    	MathProblem mathProblemInstance = new MathProblem();
+    	int [] array = {0};
+    	
+    	mathProblemInstance.printArray(mathProblemInstance.plusOne(array));
+    }
     
     public static void main(String [] args)
     {
@@ -194,6 +206,12 @@ public class LeetCodeOJ {
     	 * testClimbingStairs
     	 * 2014/12/8
     	 */
-    	testClimbingStairs();
+    	//testClimbingStairs();
+    	
+    	/*
+    	 * test plus one problem
+    	 * 2014/12/8
+    	 */
+    	testMathProblem();
     }
 }

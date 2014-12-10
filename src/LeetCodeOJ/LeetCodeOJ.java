@@ -187,6 +187,22 @@ public class LeetCodeOJ {
     	System.out.println(mathProblemInstance.findPeakElement(array));
     }
     
+    /*
+     * test binary search problem
+     * 2014/12/10
+     */
+    public static void testBinarySearchProblem(){
+    	BinarySerachProblem binarySearchProblemInstance = new BinarySerachProblem();
+    	int [] array = {3};
+    	for(int i = 0;i < 2*array.length;i++){
+    		System.out.print("the index of atrget " + i + " in array is: "
+    				+ binarySearchProblemInstance.searchInsert(array, i));
+    		System.out.println();
+    	}
+
+    }
+    
+    
     public static void main(String [] args)
     {
     	//test case for intersectionLinkedList
@@ -220,5 +236,10 @@ public class LeetCodeOJ {
     	 * 2014/12/8
     	 */
     	testMathProblem();
+    	
+    	/*
+    	 * 2014/12/10
+    	 */
+    	testBinarySearchProblem();
     }
 }

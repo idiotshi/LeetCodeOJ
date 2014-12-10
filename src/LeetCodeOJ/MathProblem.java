@@ -26,5 +26,24 @@ public class MathProblem {
 		//if(array == null) return;
 		for(int i = 0;i < array.length;i++)
 			System.out.print(array[i]+" ");
+		
+		System.out.println();
+	}
+	
+	/*
+	 * find pead element
+	 * 2014/12/10
+	 */
+	public int findPeakElement(int [] num){
+		if(num.length == 0) return 0;
+		int left = 0;
+		int right = num.length - 1;
+		while(left < right){
+			if(num[(left+right)/2 + 1] > num[(left+right)/2])
+				left = (left+right)/2 + 1;
+			else
+				right = (left+right)/2;
+		}
+		return left;
 	}
 }

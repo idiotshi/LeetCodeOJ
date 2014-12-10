@@ -175,9 +175,16 @@ public class LeetCodeOJ {
     public static void testMathProblem()
     {
     	MathProblem mathProblemInstance = new MathProblem();
-    	int [] array = {0};
+    	int [] array = {0,0};
     	
+    	System.out.println("input array:");
+    	mathProblemInstance.printArray(array);
+    	
+    	System.out.println("after plus one");
     	mathProblemInstance.printArray(mathProblemInstance.plusOne(array));
+    	
+    	System.out.println("find one LOCAL peak element index:");
+    	System.out.println(mathProblemInstance.findPeakElement(array));
     }
     
     public static void main(String [] args)

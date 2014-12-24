@@ -193,13 +193,75 @@ public class LeetCodeOJ {
      */
     public static void testBinarySearchProblem(){
     	BinarySerachProblem binarySearchProblemInstance = new BinarySerachProblem();
+    	
+    	System.out.println("search insert position");
     	int [] array = {3};
     	for(int i = 0;i < 2*array.length;i++){
-    		System.out.print("the index of atrget " + i + " in array is: "
+    		/*
+    		 * search insert position
+    		 */
+    		System.out.print("the index of target " + i + " in array is: "
     				+ binarySearchProblemInstance.searchInsert(array, i));
     		System.out.println();
     	}
+    	
+		/*
+		 * search in rotated sorted array
+		 */
+    	System.out.println("search in rotated sorted array");
+    	//int [] array2 = {4,5,6,7,0,1,3};
+    	//int [] array2 = {1,3,5};
+    	//int [] array2 = {3,1};
+    	//int [] array2 = {1};
+    	//int [] array2 = {3,5,1};
+    	//int [] array2 = {3,4,5,6,1,2};//2
+    	//int [] array2 = {8,9,2,3,4};
+    	
+    	//int [] array2 = {3,3,5,5,0,2,2,2,2,2,3};
+    	//int [] array2 = {3,3};
+    	//int [] array2 = {1,3,1,1,1};
+    	//int [] array2 = {1,1,3,1,1,1,1};
+    	int [] array2 = {1,1,1,3};
+		//System.out.print(binarySearchProblemInstance.search(array2,9));
+    	for(int i = 0;i < 2*array2.length;i++){
+    		/*
+    		 * search insert position
+    		 */
+    		System.out.print("the index of target " + i + " in array is: "
+    				+ binarySearchProblemInstance.search(array2,i));
+    		System.out.println();
+    	}
+    	
+    	/*
+    	 * search the range
+    	 * 2014/12/23
+    	 */
+    	int [] array3 = {5,5,7,7,8,8,10};
+    	//int [] array3 = {5,7,7,8,8,8};
+    	//int [] array3 = {8};
+    	//int [] array3 = {8,8};
+    	//int [] array3 = {5,5};
+    	//int [] array3 = {1,4};
+    	int[] range = binarySearchProblemInstance.searchRange(array3, 8);
+    	System.out.print("the range of 8 is: { "+ range[0] +"," + range[1] + " }" );
+    	System.out.println();
 
+    	/*
+    	 * search the range
+    	 * 2014/12/23
+    	 */
+//    	int [][] matrix = {
+//    						{1,3,5,7},
+//    						{10,11,16,20},
+//    						{23,30,34,50}
+//    					};
+    	int [][] matrix = {{1}};
+    	int target = 1;
+    	boolean exist = binarySearchProblemInstance.searchMatrix(matrix, target);
+    	System.out.print("the target: "+ target +" is ");
+    	if(!exist)
+    		System.out.print("NOT ");
+    	System.out.println("in the matrix");
     }
     
     

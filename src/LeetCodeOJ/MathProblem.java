@@ -46,4 +46,29 @@ public class MathProblem {
 		}
 		return left;
 	}
+	
+	/*
+	 * pow(x,n)
+	 * 2014/12/24
+	 */
+	public double pow(double x,int n){
+		if(n == 0)
+			return 1;
+		if(x == 0)
+			return 0;
+		if(n < 0){
+			n = -n;
+			x = 1/x;
+		}		
+		double tmp = x;	
+		double result = 1;
+		while( n != 0){
+			if(n % 2 != 0)
+				result = result * tmp;
+			n = n/2;
+			tmp = tmp*tmp;
+		}
+		
+		return result;
+	}
 }

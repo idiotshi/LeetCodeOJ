@@ -185,6 +185,15 @@ public class LeetCodeOJ {
     	
     	System.out.println("find one LOCAL peak element index:");
     	System.out.println(mathProblemInstance.findPeakElement(array));
+    	
+    	/*
+    	 * test pow(x,n)
+    	 * 2014/12/24
+    	 */
+    	double x = 2;
+    	int n = -2;
+    	double result = mathProblemInstance.pow(x, n);
+    	System.out.println("pow("+x+","+n+") is: "+result);
     }
     
     /*
@@ -262,6 +271,33 @@ public class LeetCodeOJ {
     	if(!exist)
     		System.out.print("NOT ");
     	System.out.println("in the matrix");
+    	
+    	/*
+    	 * test findMedianSortedArrays
+    	 * 2014/12/25
+    	 * case1:{},{1}
+    	 * case2:{1,2},{3,4}
+    	 * case3:{1,2,3},{4,5,6}
+    	 * case4{1,2},{1,2}
+    	 * case5{1,1},{1,2}
+    	 * case6{1,2},{1,2,3}
+    	 * case 7{2,3}{1,4}
+    	 */
+    	int [] B = {1,2,6,7};
+    	int [] A = {3,4,5,8};
+    	double median = binarySearchProblemInstance.findMedianSortedArrays(A, B);
+    	System.out.println("The median of array A and B is: "+median);
+    	
+    	/*
+    	 * 2014/12/28
+    	 * Find Minimum in Rotated Sorted Array
+    	 */
+    	//int [] array4 = {3,1,1,1,1};
+    	//int [] array4 = {10,10,1,10,10};
+    	int [] array4 = {3,3,1,3,3,3,3};
+    	System.out.println("search Minimun in rotated sorted array: "
+    					+binarySearchProblemInstance.findMin(array4));
+    	
     }
     
     
@@ -297,7 +333,7 @@ public class LeetCodeOJ {
     	 * test plus one problem
     	 * 2014/12/8
     	 */
-    	testMathProblem();
+    	//testMathProblem();
     	
     	/*
     	 * 2014/12/10

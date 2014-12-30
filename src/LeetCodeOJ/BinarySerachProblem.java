@@ -62,11 +62,13 @@ public class BinarySerachProblem {
 		if(A[left] < A[right])
 			return left;
 
+		if(right -left < 2)
+			return A[left] > A[right] ? left:right;
 		while(left < right){
-			if(right -left < 2)
-				return A[left] > A[right] ? left:right;
+
 			int mid = (left + right)/2;
-			
+			if(mid == 0)
+				return 0;
 			/*consider duplicates exists,add equal 
 			* if A[mid] == A[left],we dont know which side the pivot is locate,e.g 
 			* {1,1,3,1,1,1,1} ,A[mid] = A[3] = 1 == A[left] = A[0],in this case we should locate the left side of
@@ -78,13 +80,13 @@ public class BinarySerachProblem {
 			if(A[mid] >= A[mid -1] && A[mid] > A[mid+1])
 				return mid;
 			else if(A[mid] > A[left])
-				left = mid + 1;
+				left = mid;// + 1;
 			else if(A[mid] < A[left])
-				right = mid -1;
+				right = mid;// -1;
 			else
 				left++;
 		}
-		return left;
+		return left == A.length -1 ? 0:left;
 	}
 	int helper(int [] A,int left,int right,int target){
 		if(target < A[left] || target > A[right])
@@ -217,4 +219,165 @@ public class BinarySerachProblem {
 		}
 		return false;
 	}
+	
+	/*
+	 * 2014/12/25
+	 * A:* * * * * * * MedianA * * * * * * * 
+	 * B:* MedianB *
+	 * if(medianA < MedianB),exclule the right side elements of B,
+	 * and the same num left side elements of A,which will not affect the meadian of A+B 
+	 * 
+	 * NOT PASSED
+	 */
+    public double findMedianSortedArrays(int A[], int B[]) {
+    		
+        int leftA = 0;
+        int rightA = A.length -1;
+        
+        int leftB = 0;
+        int rightB = B.length -1;
+        
+    	if(A.length < B.length)
+    		return findMedianSortedArrays(B,A);
+    	
+    	if(B.length == 0)
+    		return (A.length % 2 == 0) ? 
+    				(A[(A.length-1)/2] + A[A.length/2])/2.0 : A[A.length/2];
+    				
+    	if(B.length == 1){
+    		if(A.length % 2 == 0){
+	    		if(B[0] == A[(A.length-1)/2])
+	    			return B[0];
+	    		else if(B[0] < A[(A.length-1)/2])
+	    			return A[(A.length-1)/2];
+	    		else if(B[0] > A[(A.length-1)/2 + 1])
+	    			return A[(A.length-1)/2 + 1];
+	    		else
+	    			return B[0];
+	    			
+	    	}else{
+	    		if(A.length == 1)
+	    			return (A[0]+B[0])/2.0;
+	    		if(B[0] == A[(A.length-1)/2])
+	    			return B[0];
+	    		else if(B[0] < A[(A.length-1)/2 -1 ])
+	    			return (A[(A.length-1)/2-1] + A[(A.length-1)/2])/2.0;
+	    		else if(B[0] > A[(A.length-1)/2 + 1])
+	    			return (A[(A.length-1)/2 + 1] + A[(A.length-1)/2])/2.0;
+	    		else
+	    			return (B[0] + A[(A.length-1)/2])/2.0;
+	    	}
+    	}
+    		
+    				
+    	int midB = 0;
+    	int midA = 0;
+        while(rightB - leftB > 1){
+        	midA = (leftA + rightA)/2;
+        	midB = (leftB + rightB)/2;
+        	
+
+        	if(A[midA] < B[midB]){
+        		int step = Math.min(rightB - midB,midA-leftA);
+        		rightB = rightB - step;//rightB - midB;
+        		leftA = leftA + step;
+        	}else{
+        		int step = Math.min(midB - leftB,rightA - midA);
+        		leftB = leftB + step;
+        		rightA = rightA - step;
+        	}
+        }
+        
+    	midA = (leftA + rightA)/2;
+    	midB = (leftB + rightB)/2;
+
+        //here the rest size of B must be 2
+    	if((A.length + B.length) % 2 == 0){
+    		if(A[midA] == B[midB]){
+    			if((A[midA+1] == A[midA])||(B[midB+1] == B[midB])){
+    				return A[midA];
+    			}else{
+    				return A[midA+1] > B[midB+1] ? 
+    						(A[midA] + B[midB+1])/2.0 : (A[midA] + A[midA+1])/2.0;
+    			}
+    		}else if(A[midA] < B[midB]){
+    			if(B[midB+1] <= A[midA+1])
+    				return (B[midB] + B[midB+1])/2.0;
+    			else if(B[midB] <= A[midA+1])
+    				return (A[midA+1] + B[midB])/2.0;
+    			else{
+    				//A[midA] < B[midB]
+    				if(rightA - leftA == 1){
+    					if(B[midB+1] > A[midA+1])
+    						return (B[midB] + A[midA+1])/2.0;
+    					else
+    						return (B[midB] + B[midB+1])/2.0;
+    				}
+    				else{
+    					if(B[midB] > A[midA+2])
+    						return (A[midA+1] + A[midA+2])/2.0;
+    					else if(B[midB+1] < A[midA+1])
+    						return (B[midB] + B[midB+1])/2.0;
+    					else 
+    						return (B[midB] + A[midA+1])/2.0;
+    				}
+    			}
+    		}else{
+    			//A[midA] > B[midB]
+    			//{3,4,5,6}{1,2},error
+    			if(rightA - leftA == 1){
+	    			if(B[midB+1] <= A[midA])
+	    				return (A[midA] + B[midB+1])/2.0;
+	    			if(B[midB+1] >= A[midA+1])
+	    				return (A[midA] + A[midA+1])/2.0;
+	    			else
+	    				return (A[midA] + B[midB+1])/2.0;
+    			}else{
+	    			if(B[midB+1] <= A[midA-1])
+	    				return (A[midA-1] + A[midA])/2.0;
+	    			if(B[midB+1] >= A[midA+1])
+	    				return (A[midA] + A[midA+1])/2.0;
+	    			else
+	    				return (A[midA] + B[midB+1])/2.0;
+    			}
+    		}	
+    	}else{
+    		if(A[midA] == B[midB])
+    			return A[midA];
+    		else if(B[midB] > A[midA+1])
+    			return A[midA+1];
+    		else if(B[midB] > A[midA])
+    			return B[midB];
+    		else if(B[midB+1] > A[midA])
+    			return A[midA];
+    		else if(B[midB+1] < A[midA-1])
+    			return A[midA-1];
+    		else
+    			return B[midB+1];
+    	}
+    }
+    
+    /*
+     * 2014/12/28
+     * Find Minimum in Rotated Sorted Array
+     */
+    public int findMin(int[] num) {
+    	int left = 0;
+    	int right = num.length - 1;
+    	
+    	while(left < right){
+    		if(num[left] == num[right]){
+    			left++;//right--;
+    			continue;
+    		}
+    		if(num[left] <= num[right])
+    			break;
+    		int mid = (left + right)/2;
+    		if(num[left] <= num[mid])
+    			left = mid + 1;
+    		else
+    			right = mid;
+    	}
+    	return num[left];
+    }
 }

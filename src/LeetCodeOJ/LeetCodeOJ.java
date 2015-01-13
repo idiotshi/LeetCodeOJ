@@ -1,6 +1,9 @@
 package LeetCodeOJ;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class LeetCodeOJ {
  
@@ -300,6 +303,42 @@ public class LeetCodeOJ {
     	
     }
     
+    public static void testDPProblem(){
+    	DPSolution instance = new DPSolution();
+    	
+    	//String s = "leetcode";
+    	String s  = "catsanddog";
+    	//String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    	Set<String> dict = new HashSet();
+    	//dict.add("leet");
+    	//dict.add("code");
+    	dict.add("cat");
+    	dict.add("cats");
+    	dict.add("and");
+    	dict.add("sand");
+    	dict.add("dog");
+//    	dict.add("a");
+//    	dict.add("aa");
+//    	dict.add("aaa");
+//    	dict.add("aaaa");
+//    	dict.add("aaaaa");
+//    	dict.add("aaaaaa");
+//    	dict.add("aaaaaaa");
+//    	dict.add("aaaaaaaa");
+//    	dict.add("aaaaaaaaa");
+//    	dict.add("aaaaaaaaaa");
+
+    	
+    	instance.wordBreak(s, dict);
+    	
+    	List<String> solution = instance.wordBreak2(s, dict);
+    	Iterator<String> it = solution.iterator();
+    	while(it.hasNext()){
+    		String value = it.next();
+    		System.out.println(value);
+    	}
+    }
+    
     
     public static void main(String [] args)
     {
@@ -338,6 +377,11 @@ public class LeetCodeOJ {
     	/*
     	 * 2014/12/10
     	 */
-    	testBinarySearchProblem();
+    	//testBinarySearchProblem();
+    	
+    	/*
+    	 * 2015/1/9
+    	 */
+    	testDPProblem();
     }
 }

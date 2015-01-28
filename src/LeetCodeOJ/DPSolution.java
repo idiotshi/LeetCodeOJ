@@ -130,4 +130,110 @@ public class DPSolution {
 		 }
 		 return obstacleGrid[rows-1][cols-1];
 	 }
+	 
+	 /*
+	  * unique binary tree
+	  * 
+	  */
+	 public int numTrees(int n){
+		 int [] num = new int[n+1];
+		 num[0] = 1;
+		 
+		 for(int i = 1;i <= n;i++){
+			 for(int j = 0;j < i;j++){
+				 num[i] += num[j] * num[i-1-j];
+			 }
+		 }
+		return num[n];
+	 }
+	 
+	 
+	 /*
+	  * triangle
+	  * Given a triangle, find the minimum path sum from top to bottom.
+	  *  Each step you may move to adjacent numbers on the row below.
+	  *  2015/1/16
+	  */
+	 public int minimumTotal(List<List<Integer>> triangle){
+		 int rows = triangle.size();
+		 List<Integer> minPathSum = new ArrayList<Integer>();
+		 minPathSum.addAll(triangle.get(rows-1));
+		 
+		 for(int i = rows -2;i >= 0;i--){
+			 for(int j = 0;j <= i;j++){
+				 int sum = Math.min(minPathSum.get(j), minPathSum.get(j+1)) + triangle.get(i).get(j);
+				 minPathSum.set(j, sum);
+			 }
+		 }
+		 return minPathSum.get(0);
+	 }
+	 
+	 /*
+	  * Scramble String
+	  * 2015/1/23
+	  */
+	 public boolean isScramble(String s1,String s2){
+		 if(s1.length() != s2.length())
+			 return false;
+		 int len = s1.length();
+		 boolean opt[][][] =  new boolean[len+1][len][len];
+		 
+//		 for(int i = len - 1;i >= 0;i--){
+//			 for(int j = len - 1;j >= 0;j--){
+//				 opt[i][j][1] = s1.substring(i, i+1).equals(s2.substring(j, j+1)) ? true : false;
+//				 for(int l = 2; (i + l) <= len && (j + l) <= len;l++){
+//					 for(int n = 1;n < l;n++){
+//						 opt[i][j][l] = (opt[i][j][n] && opt[i+n][j+n][l-n])
+//								 || (opt[i][j+l-n][n] && opt[i+n][j][l-n]);
+//					 }
+//				 }
+//			 }
+//		 }
+		 
+		 for(int i = 0;i < len;i++){
+			 for(int j = 0;j < len;j++){
+				 opt[1][i][j] = s1.substring(i, i+1).equals(s2.substring(j, j+1)) ? true : false;
+			 }
+		 }
+		 
+		 for(int n = 2;n <= len;n++){
+			 for(int i = 0;i + n <= len;i++){
+				 for(int j = 0;j + n <= len;j++){
+					 for(int k = 1;k < n;k++){
+						 if((opt[k][i][j] && opt[n-k][i+k][j+k]) || (opt[k][i][j+n-k] && opt[n-k][i+k][j]))
+							 opt[n][i][j] = true;
+					 }
+				 }
+			 }
+		 }
+		 
+		 return opt[len][0][0];
+	 }
+	 
+	 /*
+	  * minimum path sum
+	  * 2015/1/26
+	  */
+	 public int minPathSum(int [][] grid) {
+		 int rows = grid.length;
+		 int cols = grid[0].length;
+		 if(rows <= 0 || cols <= 0)
+			 return 0;
+		 int [][] opt = new int[rows][cols];
+		 opt[0][0] = grid[0][0];
+		 for(int i = 1; i < rows;i++){
+			 opt[i][0] = opt[i-1][0] + grid[i][0];
+		 }
+		 for(int i = 1; i < cols;i++){
+			 opt[0][i] = opt[0][i-1] + grid[0][i];
+		 }
+		 
+		 for(int i = 1; i < rows;i++){
+			 for(int j = 1; j < cols;j++){
+				 opt[i][j] = Math.min(opt[i-1][j], opt[i][j-1]) + grid[i][j];
+			 }
+		 }
+		 return opt[rows-1][cols-1];
+	 }
+	 
 }

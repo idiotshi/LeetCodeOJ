@@ -1,5 +1,6 @@
 package LeetCodeOJ;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -337,6 +338,49 @@ public class LeetCodeOJ {
     		String value = it.next();
     		System.out.println(value);
     	}
+    	
+    	/*
+    	 * test  triangle
+    	 */
+    	List<List<Integer>> triangle = new ArrayList<List<Integer>>();
+    	int [] input = {2,3,4,6,5,7,4,1,8,3};
+    	int n = 4;
+    	for(int i = 0;i < n;i++){
+    		List<Integer> rows = new ArrayList<Integer>();
+    		int temp = i*(i+1)/2;
+    		for(int j = 0; j <= i;j++){
+    			//rows.add((int) (10*Math.random()));
+    			rows.add(input[temp+j]);
+    		}
+    		triangle.add(rows);
+    	}
+    	
+    	
+    	System.out.println(instance.minimumTotal(triangle));
+    	
+    	
+    	/*
+    	 * test scramble string
+    	 */
+    	String s1 = "a";
+    	String s2 = "a";
+    	
+//    	String s1 = "abc";
+//    	String s2 = "acb";
+    	
+    	System.out.println(instance.isScramble(s1, s2));
+    	
+    	
+    	/*
+    	 * test minpathsum
+    	 */
+    	int [][] grid = {
+			    			{1,2,3},
+			    			{2,4,5}
+			    		};
+    	
+    	System.out.println(instance.minPathSum(grid));
+    	
     }
     
     

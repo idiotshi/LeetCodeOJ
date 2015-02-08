@@ -381,6 +381,88 @@ public class LeetCodeOJ {
     	
     	System.out.println(instance.minPathSum(grid));
     	
+    	/*
+    	 * test distinct subsequences
+    	 * 2015.1.28
+    	 */
+//    	String S = "rabbbit";
+//    	String T = "rabbit";
+    	
+//    	String S = "ccc";
+//    	String T = "c";
+    	
+//    	String S = "c";
+//    	String T = "ccc";
+    	String S = "";
+    	String T = "";
+    	
+    	System.out.println("The num of distinct subsequences: " + instance.numDistinct(S, T));
+    	
+    	/*
+    	 * test interleaving string
+    	 */
+    	String ss1 = "a";
+    	String ss2 = "b";
+    	String ss3 = "ab";
+    	System.out.println("IS interleave string: " + instance.isInterleave(ss1, ss2, ss3));
+    	
+    	/*
+    	 * test best time to sell stock iii
+    	 * 2015/1/30
+    	 */
+    	int [] prices = {1,2,7,3,8,9};
+    	//int [] prices = {1,-1,-3,4,9};
+    	System.out.println("MAX profits: " + instance.maxProfit3(prices));
+    	
+    	
+    	/*
+    	 * test minDistance
+    	 */
+    	String word1 = "a";
+    	String word2 = "abc";
+    	
+    	System.out.println("Min Distance: " + instance.minDistance(word1, word2));
+    	
+    	/*
+    	 * test isParentheses
+    	 */
+    	StringProblem stringInstance = new StringProblem();
+    	//String brackets = "(){}[][";
+    	String brackets = "c";
+    	System.out.println("IS brackets matched: " + stringInstance.isValid(brackets));
+    	
+    	/*
+    	 * test excel sheet column number
+    	 */
+    	String excelTitle = "AAA";
+    	System.out.println("The String :"+excelTitle+" 's column number in excel is:" + stringInstance.titleToNumber(excelTitle));
+    	
+    	/*
+    	 * test excel sheet column title
+    	 */
+    	//int i = 1;
+    	//int i = 0;
+    	//int i = 2;
+    	//int i = 25;
+    	//int i = 26;
+    	//int i = 27;
+    	//int i = 53;
+    	int i = 703;
+    	System.out.println("Title: "+stringInstance.convertToTitle(i));
+    	
+    	/*
+    	 * test add binary
+    	 */
+    	String a = "11";
+    	String b = "1";
+    	System.out.println("BINARY ADD of "+"("+a+","+b+") is:"+stringInstance.addBinary(a, b));
+    	
+    	/*
+    	 * test compare version
+    	 */
+    	String version1 = "01111";
+    	String version2 = "1";
+    	System.out.println("version1 VS version2: "+stringInstance.compareVersion(version1, version2));
     }
     
     

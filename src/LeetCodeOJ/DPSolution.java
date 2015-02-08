@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 public class DPSolution {
 	/*
@@ -236,4 +237,178 @@ public class DPSolution {
 		 return opt[rows-1][cols-1];
 	 }
 	 
+	 
+	 /*
+	  * 2015.1.28
+	  * Distinct subsequences
+	  */
+	 public int numDistinct(String S,String T){
+		 int [][] opt = new int[S.length()+1][T.length()+1];
+		 for(int i = 0;i < S.length();i++){
+		 	opt[i][0] = 1;
+		 }
+		 
+		 for(int i = 1;i <= S.length();i++){
+			 for(int j = 1;j <= T.length();j++){
+				 if(S.charAt(i-1) == T.charAt(j-1))
+					 opt[i][j] = opt[i-1][j-1] + opt[i-1][j];
+				 else
+					 opt[i][j] = opt[i-1][j];
+			 }
+		 }
+		 
+		 return opt[S.length()][T.length()];
+	 }
+	 
+	 /*
+	  * 2015/1/28
+	  * max subarray
+	  */
+	 public int maxSubArray(int [] A){
+		 int result = Integer.MIN_VALUE; int sum = 0;
+		 for(int i = 0;i < A.length;i++){
+			 if(sum < 0)
+				 sum = A[i];
+			 else
+				 sum += A[i];
+			 if(result < sum)
+				 result = sum;
+		 }
+		 return result;
+	 }
+	 
+	 /*
+	  * 2015/1/28
+	  * Interleaving string
+	  */
+	public boolean isInterleave(String s1,String s2,String s3){
+		if(s3.length() != (s1.length() + s2.length()))
+			return false;
+		
+		boolean [][] opt = new boolean[s1.length()+1][s2.length()+1];
+		
+		opt[0][0] = true;
+		for(int i = 1;i <= s1.length();i++){
+			opt[i][0] = opt[i-1][0] && (s1.charAt(i-1) == s3.charAt(i-1)); 
+		}
+		for(int i = 1;i <= s2.length();i++){
+			opt[0][i] = (opt[0][i-1] && (s2.charAt(i-1)) == (s3.charAt(i-1))); 
+		}
+		
+		for(int i = 1;i <= s1.length();i++){
+			for(int j = 1;j <= s2.length();j++){
+				if(s1.charAt(i-1) == s3.charAt(i+j-1))
+					opt[i][j] = opt[i-1][j];
+				if(s2.charAt(j-1) == s3.charAt(i+j-1))
+					opt[i][j] = opt[i][j-1];
+			}
+		}
+		
+		return opt[s1.length()][s2.length()];
+	}
+	
+	
+	/*
+	 * Best Time to Buy and Sell Stock
+	 * 2015/1/30
+	 */
+	public int maxProfit(int [] prices){
+        if(prices.length <= 0)
+            return 0;
+		int min = prices[0];
+		int maxProfit = 0;
+		
+		for(int i = 1;i < prices.length;i++){
+			min = Math.min(min, prices[i]);
+			maxProfit = Math.max(maxProfit, prices[i] - min);
+		}
+		return maxProfit;
+	}
+	
+	/*
+	 * Best Time to Buy and Sell Stock iii
+	 * 2015/1/30
+	 */
+	public int maxProfit3(int [] prices){
+		if(prices.length <= 1)
+			return 0;
+		
+		/*
+		 * Time Limit Exceeded
+		 * Last executed input:	[10000,9999,9998,9997,9996,9995,9994,9993,9992,9991,9990,9989,9988,9987,9986,9985,9984...
+		 */
+		/*
+		int min = prices[0];
+		int [] profit = new int[prices.length];
+		//int maxProfitLeft = 0;
+		int maxProfitRight = 0;
+		int totalMaxProfit = 0;
+		
+		for(int i = 1;i < prices.length;i++){
+			min = Math.min(min, prices[i]);
+			profit[i] = Math.max(profit[i], prices[i] - min);
+			//profit[i] = maxProfitLeft;
+			int max = prices[i];
+			for(int j = i;j > 1;j--){
+				max = Math.max(max, prices[j]);
+				maxProfitRight = Math.max(maxProfitRight, max - prices[j]);
+				totalMaxProfit = Math.max(totalMaxProfit, profit[j-1]+maxProfitRight);
+			}
+		}
+		return totalMaxProfit;
+		*/
+		int min = prices[0];
+		int [] profitLeft = new int[prices.length];
+		int [] profitRight = new int[prices.length];
+		
+		for(int i = 1;i < prices.length;i++){
+			min = Math.min(min, prices[i]);
+			profitLeft[i] = Math.max(profitLeft[i-1], prices[i] - min);
+		}
+		int max = prices[prices.length-1];
+		for(int i = prices.length - 2;i > 0;i--){
+			max = Math.max(max, prices[i]);
+			profitRight[i] = Math.max(profitRight[i+1], max - prices[i]);
+		}
+		
+		max = 0;
+		for(int i = 1;i < prices.length;i++){
+			max = Math.max(max,profitLeft[i] +  profitRight[i]);
+		}
+		return max;
+	}
+	
+	/*
+	 * edit distance
+	 * 2015/2/2
+	 */
+	public int minDistance(String word1,String word2){
+		
+
+		if(word1.length() == 0)
+			return word2.length();
+		if(word2.length() == 0)
+			return word1.length();
+		
+		int [][] opt = new int [word1.length()+1][word2.length()+1];
+		
+		for(int i = 0;i <= word1.length();i++){
+			opt[i][0] = i;
+		}
+		for(int i = 0;i <= word2.length();i++){
+			opt[0][i] = i;
+		}
+		
+		for(int i = 1;i <= word1.length();i++){
+			//opt[i-1][0] = i-1;
+			for(int j = 1;j <= word2.length();j++){
+				//opt[0][j-1] = j-1;
+				if(word1.charAt(i-1) == word2.charAt(j-1))
+					opt[i][j] = opt[i-1][j-1];
+				else
+					opt[i][j] = Math.min(opt[i-1][j-1], Math.min(opt[i][j-1], opt[i-1][j])) + 1;
+			}
+		}
+		return opt[word1.length()][word2.length()];
+	}  
 }

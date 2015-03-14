@@ -113,4 +113,119 @@ public class StringProblem {
 		}
 		return 0;
 	}
+	
+	/*
+	 *ZigZag Conversion
+	 *寻找下标规律
+	 */
+	public String zigZagConvert(String s,int nRows){
+		if(nRows <= 1 || s.length() == 0)
+			return s;
+		
+		String res = "";
+		int len = s.length();
+		
+		for(int i = 0;i < nRows && i < len;i++){
+//			if(i >= len)
+//				break;
+			
+			int idx = i;
+			res += s.charAt(idx);
+			for(int k = 1;idx < len;k++){
+				if(i == 0 || i == nRows -1)
+					idx += 2*(nRows-1);
+				else{
+					if((k & 0x1) == 1)
+						idx += 2*(nRows - i -1);
+					else
+						idx += 2*i;
+				}
+				if(idx < len)
+					res += s.charAt(idx);	
+			}
+		}
+		return res;
+	}
+	
+	/*
+	 * simplify unix path
+	 * 2015/2/10
+	 */
+	public String simplifyPath(String path){
+		Stack<String> stack = new Stack();
+		int len = path.length();
+		int pos = 0;
+		
+		while(pos < len){
+			while(pos < len && path.charAt(pos) == '/')
+				pos++;
+			
+			int start = pos;
+			while(pos < len && path.charAt(pos) != '/')
+				pos++;
+			
+			if(start == pos)
+				break;
+			String tmp = path.substring(start, pos);
+			
+			if(tmp.equals("."))
+				continue;
+			else if(tmp.equals("..")){
+				if(!stack.isEmpty()){
+					stack.pop();
+				}
+			}else
+				stack.push(tmp);
+		}			
+		String res = "";
+		while(!stack.isEmpty()){
+			res = "/" + stack.pop() + res;
+		}
+		if(res == "") 
+			res = "/";
+		return res;
+	}
+	
+	/*
+	 * 2015/2/10
+	 * longest common prefix
+	 */
+	public String longestCommonPrefix(String [] strs){
+		if(strs.length <= 0)
+			return "";
+		String prefix = strs[0];
+		for(int i = 1; i < strs.length;i++){
+			if(prefix.length() == 0 || strs[i].length() == 0)
+				return "";
+			
+			int len = Math.min(prefix.length(), strs[i].length());
+			int j = 0;
+			for(j = 0;j < len;j++){
+				if(prefix.charAt(j) != strs[i].charAt(j)){
+					break;
+				}
+			}
+			prefix = prefix.substring(0,j);
+			
+		}
+		return prefix;
+	}
+	
+	public int lengthOfLastWord(String s){
+		int len = s.length();
+		int lastWordLen = 0;
+		boolean newWorld = false;
+		for(int i = 0;i < len;i++){
+			if(s.charAt(i) != ' '){
+				if(newWorld){
+					lastWordLen = 1;
+					newWorld = false;
+				}else
+					lastWordLen++;
+			}	
+			else
+				newWorld = true;
+		}
+		return lastWordLen;
+	}
 }

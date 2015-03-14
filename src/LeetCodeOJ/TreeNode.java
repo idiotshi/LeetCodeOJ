@@ -175,4 +175,14 @@ class BinaryTree {
 		dfsLevelOrder(root.left,level+1,result);
 		dfsLevelOrder(root.right,level+1,result);
 	}
+	
+	/*
+	 * max depth of binary tree
+	 * 2015/2/8
+	 */
+	public int maxDepth(TreeNode root){
+		if(root == null)
+			return 0;
+		return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+	}
 }

@@ -158,6 +158,11 @@ public class LeetCodeOJ {
     	//System.out.print("levelOrderDfsResult: ");
     	//System.out.println(levelOrderResultDfs);
     	
+    	/*
+    	 * test max depth
+    	 */
+    	System.out.println("The MAX depth of binary tree£º "+binaryTree.maxDepth(binaryTree.root));
+    	
     }
     
     /*
@@ -423,6 +428,10 @@ public class LeetCodeOJ {
     	
     	System.out.println("Min Distance: " + instance.minDistance(word1, word2));
     	
+    	
+    }
+    
+    public static void testStringProblems(){
     	/*
     	 * test isParentheses
     	 */
@@ -463,6 +472,30 @@ public class LeetCodeOJ {
     	String version1 = "01111";
     	String version2 = "1";
     	System.out.println("version1 VS version2: "+stringInstance.compareVersion(version1, version2));
+    	
+    	/*
+    	 * test zigzag convert
+    	 */
+    	String inputString = "abcdefg";
+    	int nRows = 3;
+    	System.out.println(inputString+"'s "+nRows+" zigzag output: "+stringInstance.zigZagConvert(inputString, nRows));
+    	
+    	/*
+    	 * test simplify unix path
+    	 */
+    	//String path = "/home/";
+    	String path = "/a/./b/../../c/";
+    	System.out.println(path+" can be simplify to "+stringInstance.simplifyPath(path));
+    	
+    	//String [] prefixString = {"abc","abcdefg","abd"};
+    	String [] prefixString = {"aa","a"};
+    	System.out.println("Longest common prefix of "+prefixString[0]+
+    			" and "+prefixString[1]+
+    			" is "+stringInstance.longestCommonPrefix(prefixString));
+    	
+    	
+    	String wordString = "hello world     fuck you     ";
+    	System.out.println("The last word's length is "+stringInstance.lengthOfLastWord(wordString));
     }
     
     
@@ -486,7 +519,7 @@ public class LeetCodeOJ {
     	/*
     	 * binary tree related prob test
     	 */
-    	//binaryTreeRelatedTest();
+    	binaryTreeRelatedTest();
     	
     	/*
     	 * testClimbingStairs
@@ -508,6 +541,11 @@ public class LeetCodeOJ {
     	/*
     	 * 2015/1/9
     	 */
-    	testDPProblem();
+    	//testDPProblem();
+    	
+    	/*
+    	 * 2015/2/9
+    	 */
+    	testStringProblems();
     }
 }
